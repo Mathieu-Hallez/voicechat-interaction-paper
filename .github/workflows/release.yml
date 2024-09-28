@@ -9,8 +9,6 @@ jobs:
   release:
     runs-on: ubuntu-latest
     env:
-      MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-      HANGAR_TOKEN: ${{ secrets.HANGAR_TOKEN }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
@@ -20,12 +18,6 @@ jobs:
           java-version: 17
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-      - name: Publish to Modrinth
-        run: >
-          chmod +x ./gradlew &&
-          ./gradlew modrinth
-      - name: Publish to Hangar
-        run: ./gradlew publishAllPublicationsToHangar
       - name: Build for GitHub
         run: ./gradlew build
       - name: Publish to GitHub
